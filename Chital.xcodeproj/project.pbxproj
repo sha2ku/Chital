@@ -19,6 +19,9 @@
 		85156A5C2CA6C0210061ED78 /* ChatModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85156A542CA6C0210061ED78 /* ChatModels.swift */; };
 		85156A5D2CA6C0210061ED78 /* ChatThreadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85156A552CA6C0210061ED78 /* ChatThreadView.swift */; };
 		85156A602CA6C0E80061ED78 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 85156A5F2CA6C0E80061ED78 /* MarkdownUI */; };
+		DC8CF9742D43830F00B79E67 /* Splash in Frameworks */ = {isa = PBXBuildFile; productRef = DC8CF9732D43830F00B79E67 /* Splash */; };
+		DC8CF9782D43846D00B79E67 /* SplashCodeSyntaxHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8CF9762D43846D00B79E67 /* SplashCodeSyntaxHighlighter.swift */; };
+		DC8CF9792D43846D00B79E67 /* TextOutputFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8CF9772D43846D00B79E67 /* TextOutputFormat.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +38,8 @@
 		85156A532CA6C0210061ED78 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		85156A542CA6C0210061ED78 /* ChatModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatModels.swift; sourceTree = "<group>"; };
 		85156A552CA6C0210061ED78 /* ChatThreadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatThreadView.swift; sourceTree = "<group>"; };
+		DC8CF9762D43846D00B79E67 /* SplashCodeSyntaxHighlighter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashCodeSyntaxHighlighter.swift; sourceTree = "<group>"; };
+		DC8CF9772D43846D00B79E67 /* TextOutputFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextOutputFormat.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +48,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				85156A602CA6C0E80061ED78 /* MarkdownUI in Frameworks */,
+				DC8CF9742D43830F00B79E67 /* Splash in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +74,7 @@
 		85156A3C2CA6BFD20061ED78 /* Chital */ = {
 			isa = PBXGroup;
 			children = (
+				DC8CF9752D43846A00B79E67 /* SyntaxHighlighter */,
 				85156A3D2CA6BFD20061ED78 /* ChitalApp.swift */,
 				85156A502CA6C0210061ED78 /* AppConstants.swift */,
 				85156A4F2CA6C0210061ED78 /* ChatBubbleView.swift */,
@@ -92,6 +99,15 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		DC8CF9752D43846A00B79E67 /* SyntaxHighlighter */ = {
+			isa = PBXGroup;
+			children = (
+				DC8CF9762D43846D00B79E67 /* SplashCodeSyntaxHighlighter.swift */,
+				DC8CF9772D43846D00B79E67 /* TextOutputFormat.swift */,
+			);
+			path = SyntaxHighlighter;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -110,6 +126,7 @@
 			name = Chital;
 			packageProductDependencies = (
 				85156A5F2CA6C0E80061ED78 /* MarkdownUI */,
+				DC8CF9732D43830F00B79E67 /* Splash */,
 			);
 			productName = Chital;
 			productReference = 85156A3A2CA6BFD20061ED78 /* Chital.app */;
@@ -123,7 +140,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1540;
-				LastUpgradeCheck = 1540;
+				LastUpgradeCheck = 1620;
 				TargetAttributes = {
 					85156A392CA6BFD20061ED78 = {
 						CreatedOnToolsVersion = 15.4;
@@ -141,6 +158,7 @@
 			mainGroup = 85156A312CA6BFD20061ED78;
 			packageReferences = (
 				85156A5E2CA6C0E70061ED78 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
+				DC8CF9722D43830F00B79E67 /* XCRemoteSwiftPackageReference "Splash" */,
 			);
 			productRefGroup = 85156A3B2CA6BFD20061ED78 /* Products */;
 			projectDirPath = "";
@@ -168,6 +186,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC8CF9782D43846D00B79E67 /* SplashCodeSyntaxHighlighter.swift in Sources */,
+				DC8CF9792D43846D00B79E67 /* TextOutputFormat.swift in Sources */,
 				85156A5B2CA6C0210061ED78 /* SettingsView.swift in Sources */,
 				85156A572CA6C0210061ED78 /* ChatBubbleView.swift in Sources */,
 				85156A5A2CA6C0210061ED78 /* ChatInputView.swift in Sources */,
@@ -217,6 +237,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -280,6 +301,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -310,8 +332,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Chital/Preview Content\"";
-				DEVELOPMENT_TEAM = 7C94W7X82V;
+				DEVELOPMENT_TEAM = BQF6YM3NLN;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -340,8 +363,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Chital/Preview Content\"";
-				DEVELOPMENT_TEAM = 7C94W7X82V;
+				DEVELOPMENT_TEAM = BQF6YM3NLN;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -390,7 +414,15 @@
 			repositoryURL = "https://github.com/gonzalezreal/swift-markdown-ui";
 			requirement = {
 				kind = exactVersion;
-				version = 2.4.0;
+				version = 2.4.1;
+			};
+		};
+		DC8CF9722D43830F00B79E67 /* XCRemoteSwiftPackageReference "Splash" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/JohnSundell/Splash";
+			requirement = {
+				kind = exactVersion;
+				version = 0.16.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -400,6 +432,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 85156A5E2CA6C0E70061ED78 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */;
 			productName = MarkdownUI;
+		};
+		DC8CF9732D43830F00B79E67 /* Splash */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DC8CF9722D43830F00B79E67 /* XCRemoteSwiftPackageReference "Splash" */;
+			productName = Splash;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

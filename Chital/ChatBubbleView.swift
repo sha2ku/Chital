@@ -1,12 +1,84 @@
 import SwiftUI
 import MarkdownUI
+import Splash
+import UserNotifications
 
 struct ChatBubbleView: View {
     let message: ChatMessage
     let isThinking: Bool
     let onRetry: () -> Void
     
+    @State private var isLoading = false
     @State private var isHovering = false
+    @Environment(\.colorScheme) private var colorScheme
+    
+    @ViewBuilder
+    private func codeBlock(_ configuration: CodeBlockConfiguration) -> some View {
+        VStack(spacing: 0) {
+            HStack {
+                Text(configuration.language?.isEmpty == false ? configuration.language! : "plain text")
+                    .font(.system(.caption, design: .monospaced))
+                    .fontWeight(.semibold)
+                    .foregroundColor(Color(theme.plainTextColor))
+                Spacer()
+                Image(systemName: "clipboard")
+                    .onTapGesture {
+                        copyToClipboard(configuration.content)
+                    }
+                    .opacity(isLoading ? 0 : 1)
+            }
+            .padding(.horizontal)
+            .padding(.vertical, 8)
+            .background {
+                Color(theme.backgroundColor)
+            }
+            
+            Divider()
+            
+            ScrollView(.horizontal) {
+                configuration.label
+                    .relativeLineSpacing(.em(0.25))
+                    .markdownTextStyle {
+                        FontFamilyVariant(.monospaced)
+                        FontSize(.em(0.85))
+                    }
+                    .padding()
+            }
+        }
+        //        .background(Color.secondary)
+        .clipShape(RoundedRectangle(cornerRadius: 8))
+        .markdownMargin(top: .zero, bottom: .em(0.8))
+        .overlay( // 添加边框
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(Color.gray, lineWidth: 1) // 边框颜色和宽度
+        )
+        .padding(.vertical, 8)
+    }
+    
+    private var theme: Splash.Theme {
+        // NOTE: We are ignoring the Splash theme font
+        switch self.colorScheme {
+        case .dark:
+            return .wwdc17(withFont: .init(size: 16))
+        default:
+            return .sunset(withFont: .init(size: 16))
+        }
+    }
+    private func copyToClipboard(_ string: String) {
+        let pasteboard = NSPasteboard.general
+        pasteboard.clearContents()
+        pasteboard.setString(string, forType: .string)
+        
+        withAnimation {
+            isLoading = true
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            withAnimation {
+                isLoading = false
+            }
+        }
+    }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
@@ -22,7 +94,10 @@ struct ChatBubbleView: View {
                     .padding(12)
                     .textSelection(.enabled)
                     .background(message.isUser ? Color.accentColor.opacity(0.2) : Color(NSColor.textBackgroundColor))
-                    .cornerRadius(8)
+                    .cornerRadius(8).markdownBlockStyle(\.codeBlock) {
+                        codeBlock($0)
+                    }
+                    .markdownCodeSyntaxHighlighter(.splash(theme: self.theme))
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
                 if (message.text != "") {
