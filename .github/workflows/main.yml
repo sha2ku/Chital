@@ -21,7 +21,7 @@ jobs:
         platform:
           - macOS
         scheme:
-          - SwiftUI
+          - Chital
     runs-on: macos-latest
     steps:
     - name: Switch xcode to latest-stable
