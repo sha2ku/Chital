@@ -73,6 +73,7 @@ struct SettingsView: View {
                 }
             }
             .padding()
+            .frame(maxWidth: 500, minHeight: 300)
         }
         .onChange(of: contextWindowLengthString) { oldValue, newValue in
             if let value = Int(newValue) {

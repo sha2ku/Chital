@@ -29,9 +29,9 @@ struct ChatBubbleView: View {
             }
             .padding(.horizontal)
             .padding(.vertical, 8)
-            .background {
-                Color(theme.backgroundColor)
-            }
+            //            .background {
+            //                Color(theme.backgroundColor)
+            //            }
             
             Divider()
             
@@ -45,12 +45,12 @@ struct ChatBubbleView: View {
                     .padding()
             }
         }
-        //        .background(Color.secondary)
+        //                .background(Color.secondary)
         .clipShape(RoundedRectangle(cornerRadius: 8))
         .markdownMargin(top: .zero, bottom: .em(0.8))
-        .overlay( // 添加边框
+        .overlay(
             RoundedRectangle(cornerRadius: 8)
-                .stroke(Color.gray, lineWidth: 1) // 边框颜色和宽度
+                .stroke(Color.gray.opacity(0.2), lineWidth: 1)
         )
         .padding(.vertical, 8)
     }
@@ -90,15 +90,25 @@ struct ChatBubbleView: View {
             }
             
             ZStack(alignment: .bottom) {
-                Markdown(message.text != "" ? message.text : "..." )
-                    .padding(12)
-                    .textSelection(.enabled)
-                    .background(message.isUser ? Color.accentColor.opacity(0.2) : Color(NSColor.textBackgroundColor))
-                    .cornerRadius(8).markdownBlockStyle(\.codeBlock) {
-                        codeBlock($0)
-                    }
-                    .markdownCodeSyntaxHighlighter(.splash(theme: self.theme))
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                if message.isUser {
+                    Text(message.text != "" ? message.text : "...")
+                        .padding(12)
+                        .textSelection(.enabled)
+                        .background(Color.accentColor.opacity(0.2))
+                        .cornerRadius(8)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                } else {
+                    Markdown(message.text != "" ? message.text : "..." )
+                        .padding(12)
+                        .textSelection(.enabled)
+                        .background(Color(NSColor.textBackgroundColor))
+                        .cornerRadius(8)
+                        .markdownBlockStyle(\.codeBlock) {
+                            codeBlock($0)
+                        }
+                        .markdownCodeSyntaxHighlighter(.splash(theme: self.theme))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
                 
                 if (message.text != "") {
                     HStack() {
