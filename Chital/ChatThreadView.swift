@@ -206,7 +206,18 @@ struct ChatThreadView: View {
                 ollamaMessages.append(OllamaChatMessage(role: "user", content: titleSummaryPrompt))
                 
                 let ollamaService = OllamaService()
-                let summaryResponse = try await ollamaService.sendSingleMessage(model: selectedModel, messages: ollamaMessages)
+                var summaryResponse = try await ollamaService.sendSingleMessage(model: selectedModel, messages: ollamaMessages)
+                
+                let thinkModels = ["deepseek-r1:8b","deepseek-r1:latest"]
+                
+                if thinkModels.contains(selectedModel) {
+                    let pattern = "<think>.*?</think>"
+                    
+                    if let regex = try? NSRegularExpression(pattern: pattern, options: .dotMatchesLineSeparators) {
+                        let range = NSRange(location: 0, length: summaryResponse.utf16.count)
+                        summaryResponse = regex.stringByReplacingMatches(in: summaryResponse, options: [], range: range, withTemplate: "").trimmingCharacters(in: .whitespacesAndNewlines)
+                    }
+                }
                 
                 await MainActor.run {
                     setThreadTitle(summaryResponse)

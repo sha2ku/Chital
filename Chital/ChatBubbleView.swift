@@ -21,7 +21,7 @@ struct ChatBubbleView: View {
                     .fontWeight(.semibold)
                     .foregroundColor(Color(theme.plainTextColor))
                 Spacer()
-                Image(systemName: "clipboard")
+                Image(systemName: "doc.on.doc")
                     .onTapGesture {
                         copyToClipboard(configuration.content)
                     }
@@ -130,7 +130,7 @@ struct ChatBubbleView: View {
                             RoundedRectangle(cornerRadius: 6)
                                 .stroke(Color.gray.opacity(0.3), lineWidth: 0.5)
                         )
-                        .offset(y: 15)
+                        .offset(y: 0)
                         .opacity(isHovering ? 1 : 0)
                         .animation(.easeInOut(duration: 0.2), value: isHovering)
                         
